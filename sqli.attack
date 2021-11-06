@@ -1,0 +1,9 @@
+@reallyslow
+Feature: Run sqlmap against our target and test any web forms on the page
+  # See: https://github.com/sqlmapproject/sqlmap/wiki/Usage
+
+Scenario: Identify SQL injection vulnerabilities on the login page
+  Given "sqlmap" is installed
+  And the following profile:
+    | name.    | value      |
+    
