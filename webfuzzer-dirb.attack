@@ -1,0 +1,18 @@
+@slow
+Feature: Run dirb scan on an URL
+
+Scenario: Use dirb to scan a website for basic security requirements (the DIRB_WORDLISTS environment variable refers to a wordlist)
+  Given "dirb" is installed
+  And the following profile:
+    | name                | value                                |
+    | hostname            | http://docker.for.mac.localhost:8008 |
+    | dirb_wordlists_path | Overwritten by $DIRB_WORDLISTS       |
+    | wordlist            | vulns/tests.txt                      |
+  When I launch a "dirb" attach with:
+  """
+  dirb <hostname> <dirb_wordlists_path>/<wordlist> -wf
+  """
+  Then the output should contain:
+  """
+  FOUND: 0
+  """
